@@ -3,10 +3,10 @@ std::string encryptCaesar(std::string string,int a){
     int b;
     for (int i=0; i < string.length(); i++){
         if (string[i]!=' ' && string[i]!=',' && string[i]!='.'){
-            //char s=string[i];
             b=(int)string[i];
             b+=a;
-            if (b > (int)'z'){
+            if ((string[i] >'a' && b > (int)'z')
+                || (string[i] <'a' && b > (int)'Z')){
                 b-=26;
             }
             string[i]=(char)b;
