@@ -1,7 +1,7 @@
 #include <iostream>
 bool check (std::string s){
     for (int i=0; i < s.length(); i++){
-        if (s.length() > 3
+        if (s.length() != 3
            ||(s[i]!='X' && s[i]!='O' && s[i]!='.')){
             return false;
         }
@@ -53,6 +53,19 @@ bool winO(char game[][4]){
     }
     return false;
 }
+std::string win(char game[][4]){
+    gamePresent(game);
+    if ((winX(game) && winO(game)) || (!winX(game) && !winO(game))){
+        return "Nobody";
+    }
+    else if (winX(game)){
+        return "Petya won";
+    }
+    else if (winO(game)) {
+        return "Vanya won";
+    }
+
+}
 
 
 int main() {
@@ -62,7 +75,7 @@ int main() {
             game[i][j] = '.';
         }
     }
-    std::string XO, first, second, third;
+    std::string XO, V;
     for (int i = 1; i < 4; i++) {
         std::cout << "input strings";
         std::cin >> XO;
@@ -70,16 +83,13 @@ int main() {
             std::cout << "Incorrect\n";
             break;
         }
-        gameEnter(XO, i, game);
+        else{
+            gameEnter(XO, i, game);
+        }
+        if (i==3){
+            std::cout << win(game);
+
+        }
     }
-    gamePresent(game);
-    if (winX(game)){
-        std::cout << "Petya won";
-    }
-    else if (winO(game)) {
-        std::cout << "Vanya won";
-    }
-    else {
-        std::cout << "Nobody";
-    }
+
 }
