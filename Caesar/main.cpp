@@ -1,5 +1,6 @@
 #include <iostream>
-std::string encryptCaesar(std::string string,int a){
+std::string encryptCaesar(const std::string str,int a){
+    std::string string=str;
     int b;
     for (int i=0; i < string.length(); i++){
         if (string[i]!=' ' && string[i]!=',' && string[i]!='.'){
@@ -14,27 +15,17 @@ std::string encryptCaesar(std::string string,int a){
     }
     return string;
 }
-std::string decryptCaesar(std::string str,int b){
-    b=26-b;
-    str=encryptCaesar(str,b);
-    return str;
+std::string decryptCaesar(const std::string str,int b){
+    return encryptCaesar(str,26-b);
 }
 int main() {
     std::string string;
-    std::string over;
     int a;
-    int n;
     std::cout<<"input massage\n";
     std::getline(std::cin,string);
     std::cout<<"\ninput number\n";
     std::cin>>a;
-    string=encryptCaesar(string,a);
-    std::cout<<string;
-    std::cout<<"\ninput massage\n";
-    std::getline(std::cin,over);
-    std::cout<<"\ninput number\n";
-    std::cin>>n;
-    over=decryptCaesar(over,n);
-    std::cout<<over;
+    std::cout<<encryptCaesar(string,a)<<"\n\n";
+    std::cout<<decryptCaesar(encryptCaesar(string,a),a);
     return 0;
 }
