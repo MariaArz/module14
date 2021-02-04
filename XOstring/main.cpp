@@ -31,6 +31,17 @@ void gamePresent(char game[][4]){
         std::cout<<std::endl;
     }
 }
+
+bool checkGame(char game[][4]){
+    for (int i=0; i<4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (game[i][j]=='.'){
+                return false;
+            }
+        }
+    }
+    return true;
+}
 bool winX(char game[][4]){
     for (int i=1; i<4; i++){
         if ((game[i][1]!='.'&& game[i][1]==game[i][2] && game[i][1]==game[i][3] && game[i][1]=='X')
@@ -55,7 +66,8 @@ bool winO(char game[][4]){
 }
 std::string win(char game[][4]){
     gamePresent(game);
-    if ((winX(game) && winO(game)) || (!winX(game) && !winO(game))){
+    if ((winX(game) && winO(game)) || (!winX(game) && !winO(game))
+        || !checkGame(game)){
         return "Nobody";
     }
     else if (winX(game)){
