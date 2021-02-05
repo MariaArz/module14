@@ -40,6 +40,24 @@ bool checkGame(char game[][4]){
             }
         }
     }
+
+    return true;
+}
+bool checkElement(char game[][4]){
+    int O=0, X=0;
+    for (int i=0; i<4; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (game[i][j]=='X'){
+                X+=1;
+            }
+            if (game[i][j]=='O'){
+                O+=1;
+            }
+        }
+    }
+    if (X <= O){
+        return false;
+    }
     return true;
 }
 bool winX(char game[][4]){
@@ -66,10 +84,17 @@ bool winO(char game[][4]){
 }
 std::string win(char game[][4]){
     gamePresent(game);
-    if ((winX(game) && winO(game)) || (!winX(game) && !winO(game))
-        || !checkGame(game)){
+    if (winX(game) && !checkElement(game)
+        || !checkElement(game))
+    {
+        return "Incorrect";
+    }
+    else if ((!winX(game) && !winO(game))||
+        (winX(game) && winO(game))||!checkGame(game))
+        {
         return "Nobody";
     }
+
     else if (winX(game)){
         return "Petya won";
     }
