@@ -84,7 +84,8 @@ bool winO(char game[][4]){
 }
 std::string win(char game[][4]){
     gamePresent(game);
-    if (winX(game) && !checkElement(game)
+    if ((winX(game) && !checkElement(game))
+        || (winO(game) && checkElement(game))
         || !checkElement(game))
     {
         return "Incorrect";
